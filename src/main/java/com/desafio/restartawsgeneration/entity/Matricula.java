@@ -1,56 +1,39 @@
 package com.desafio.restartawsgeneration.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+
+import java.time.LocalDate;
+
+@Data
+@Table(
+        name = "tb_matricula",
+        schema = "db_escola"
+)
 @Entity
-@Table(name = "matricula")
 public class Matricula {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "BIGINT UNSIGNED")
-    @EqualsAndHashCode.Include
+    @Column(columnDefinition = "INT UNSIGNED")
     private Long id;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "aluno_id",
-            columnDefinition = "BIGINT UNSIGNED"
-    )
-    private Aluno aluno;
+    @Column(nullable = false, columnDefinition = "VARCHAR(100)")
+    private String nome_aluno;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "professor_id",
-            columnDefinition = "BIGINT UNSIGNED"
-    )
-    private Professor professor;
+    @Column(nullable = false, columnDefinition = "DATE")
+    private LocalDate dataNascimento;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "sala_id",
-            columnDefinition = "BIGINT UNSIGNED"
-    )
-    private Sala sala;
+    @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
+    private double notaDoPrimeiroSemestre;
 
-    public Matricula(Aluno aluno, Professor professor, Sala sala) {
-        this.aluno = aluno;
-        this.professor = professor;
-        this.sala = sala;
-    }
+    @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
+    private double notaDoSegundoSemestre;
+
+    @Column(nullable = false, columnDefinition = "VARCHAR(100)")
+    private String nome_professor;
+
+    @Column(nullable = false, columnDefinition = "INT UNSIGNED")
+    private int numero;
 }
