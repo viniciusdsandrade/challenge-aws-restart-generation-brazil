@@ -1,13 +1,10 @@
 package com.desafio.restartawsgeneration.controller;
 
-import com.desafio.restartawsgeneration.dto.AlunoDTO;
-import com.desafio.restartawsgeneration.entity.Aluno;
 import com.desafio.restartawsgeneration.entity.Matricula;
-import com.desafio.restartawsgeneration.entity.Professor;
-import com.desafio.restartawsgeneration.entity.Sala;
+import com.desafio.restartawsgeneration.exception.MatriculaNotFoundException;
 import com.desafio.restartawsgeneration.service.MatriculaService;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,13 +21,54 @@ public class MatriculaController {
     public MatriculaController(MatriculaService matriculaService) {
         this.matriculaService = matriculaService;
     }
-    
-    @PostMapping("/create")
+
+    @PostMapping("/criar-matricula")
     public ResponseEntity<Matricula> createMatricula(@RequestBody Matricula matricula) {
-        return ResponseEntity.ok(matriculaService.createMatricula(matricula));
+        Matricula matriculaCriada = matriculaService.createMatricula(matricula);
+        return ResponseEntity.status(HttpStatus.CREATED).body(matriculaCriada);
     }
-    
-    
 
+    @PostMapping("/criar-matriculas")
+    public ResponseEntity<List<Matricula>> createMatriculas(@RequestBody List<Matricula> matriculas) {
+        List<Matricula> matriculasCriadas = matriculaService.createMatriculas(matriculas);
+        return ResponseEntity.status(HttpStatus.CREATED).body(matriculasCriadas);
+    }
 
+    @GetMapping("/listar-matriculas")
+    public ResponseEntity<List<Matricula>> getAllMatriculas() {
+        List<Matricula> matriculas = matriculaService.getAllMatriculas();
+        return ResponseEntity.ok(matriculas);
+    }
+
+    @GetMapping("/buscar-matricula/{id}")
+    public ResponseEntity<Matricula> getMatriculaById(@PathVariable Long id) {
+        try {
+            Matricula matricula = matriculaService.getMatriculaById(id);
+            return ResponseEntity.ok(matricula);
+        } catch (MatriculaNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/atualizar-matricula")
+    public ResponseEntity<Matricula> updateMatricula(@RequestBody Matricula matricula) {
+        Matricula matriculaAtualizada = matriculaService.updateMatricula(matricula);
+        return ResponseEntity.ok(matriculaAtualizada);
+    }
+
+    @DeleteMapping("/deletar-matricula/{id}")
+    public ResponseEntity<Void> deleteMatricula(@PathVariable Long id) {
+        try {
+            matriculaService.deleteMatriculaById(id);
+            return ResponseEntity.noContent().build();
+        } catch (MatriculaNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/deletar-todas-matriculas")
+    public ResponseEntity<Void> deleteAllMatriculas() {
+        matriculaService.deleteAllMatriculas();
+        return ResponseEntity.noContent().build();
+    }
 }

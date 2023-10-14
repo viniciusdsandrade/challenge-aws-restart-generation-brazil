@@ -1,56 +1,67 @@
 package com.desafio.restartawsgeneration.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+
+import java.time.LocalDate;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name = "matricula")
+@Builder
+@Entity(name = "Matricula")
+@Table(
+        name = "tb_matricula",
+        schema = "db_escola"
+)
 public class Matricula {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "BIGINT UNSIGNED")
+    @Column(columnDefinition = "INT UNSIGNED")
     @EqualsAndHashCode.Include
     private Long id;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "aluno_id",
-            columnDefinition = "BIGINT UNSIGNED"
-    )
-    private Aluno aluno;
+    @Column(nullable = false, columnDefinition = "VARCHAR(100)")
+    private String nome_aluno;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "professor_id",
-            columnDefinition = "BIGINT UNSIGNED"
-    )
-    private Professor professor;
+    @Column(nullable = false, columnDefinition = "DATE")
+    private LocalDate dataNascimento;
 
-    @ManyToOne(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "sala_id",
-            columnDefinition = "BIGINT UNSIGNED"
-    )
-    private Sala sala;
+    @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
+    private double notaDoPrimeiroSemestre;
 
-    public Matricula(Aluno aluno, Professor professor, Sala sala) {
-        this.aluno = aluno;
-        this.professor = professor;
-        this.sala = sala;
+    @Column(nullable = false, columnDefinition = "DECIMAL(4,2)")
+    private double notaDoSegundoSemestre;
+
+    @Column(nullable = false, columnDefinition = "VARCHAR(100)")
+    private String nome_professor;
+
+    @Column(nullable = false, columnDefinition = "INT UNSIGNED")
+    private int numero;
+
+    @Override
+    public String toString() {
+        return "{\n" +
+                "    \"id\" : " + id + ",\n" +
+                "    \"nome_aluno\" :\" " + nome_aluno + "\",\n" +
+                "    \"dataNascimento\" :\" " + dataNascimento + "\",\n" +
+                "    \"notaDoPrimeiroSemestre\" : " + notaDoPrimeiroSemestre + ",\n" +
+                "    \"notaDoSegundoSemestre\" : " + notaDoSegundoSemestre + ",\n" +
+                "    \"nome_professor\" :\" " + nome_professor + "\",\n" +
+                "    \"numero\" : " + numero + "\n" +
+                "}";
     }
 }
