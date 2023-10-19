@@ -18,7 +18,6 @@ public class MatriculaController {
 
     private final MatriculaService matriculaService;
 
-
     @Contract(pure = true)
     public MatriculaController(MatriculaService matriculaService) {
         this.matriculaService = matriculaService;
