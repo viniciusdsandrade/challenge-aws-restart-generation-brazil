@@ -1,10 +1,12 @@
-package com.desafio.restartawsgeneration.service.impl;
+package com.desafio.restartawsgeneration.RestartAwsGenerationApplication.service.impl;
 
-import com.desafio.restartawsgeneration.entity.Matricula;
-import com.desafio.restartawsgeneration.exception.MatriculaNotFoundException;
-import com.desafio.restartawsgeneration.repository.MatriculaRepository;
-import com.desafio.restartawsgeneration.service.MatriculaService;
-import org.jetbrains.annotations.NotNull;
+import com.desafio.restartawsgeneration.RestartAwsGenerationApplication.entity.Matricula;
+import com.desafio.restartawsgeneration.RestartAwsGenerationApplication.exception.MatriculaNotFoundException;
+import com.desafio.restartawsgeneration.RestartAwsGenerationApplication.repository.MatriculaRepository;
+import com.desafio.restartawsgeneration.RestartAwsGenerationApplication.service.MatriculaService;
+
+import jakarta.validation.constraints.NotNull;
+import org.jetbrains.annotations.Contract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ public class MatriculaServiceImpl implements MatriculaService {
 
     private final MatriculaRepository matriculaRepository;
 
+    @Contract(pure = true)
     @Autowired
     public MatriculaServiceImpl(MatriculaRepository matriculaRepository) {
         this.matriculaRepository = matriculaRepository;
@@ -28,7 +31,7 @@ public class MatriculaServiceImpl implements MatriculaService {
     }
 
     @Override
-    public List<Matricula> createMatriculas(@NotNull List<Matricula> alunos) {
+    public List<Matricula> createMatriculas(@NotNull @org.jetbrains.annotations.NotNull List<Matricula> alunos) {
         return alunos.stream()
                 .map(this::createMatricula)
                 .collect(Collectors.toList());
@@ -46,7 +49,7 @@ public class MatriculaServiceImpl implements MatriculaService {
     }
 
     @Override
-    public Matricula updateMatricula(@NotNull Matricula aluno) {
+    public Matricula updateMatricula(@NotNull @org.jetbrains.annotations.NotNull Matricula aluno) {
         if (aluno.getId() == null) {
             throw new IllegalArgumentException("Aluno ID cannot be null");
         }
@@ -75,7 +78,7 @@ public class MatriculaServiceImpl implements MatriculaService {
         }
     }
 
-    private void copyProperties(@NotNull Matricula source, @NotNull Matricula target) {
+    private void copyProperties(@NotNull @org.jetbrains.annotations.NotNull Matricula source, @NotNull @org.jetbrains.annotations.NotNull Matricula target) {
         target.setNome_aluno(source.getNome_aluno());
         target.setDataNascimento(source.getDataNascimento());
         target.setNotaDoPrimeiroSemestre(source.getNotaDoPrimeiroSemestre());

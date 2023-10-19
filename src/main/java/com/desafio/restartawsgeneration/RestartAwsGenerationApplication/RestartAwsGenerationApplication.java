@@ -1,4 +1,4 @@
-package com.desafio.restartawsgeneration;
+package com.desafio.restartawsgeneration.RestartAwsGenerationApplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

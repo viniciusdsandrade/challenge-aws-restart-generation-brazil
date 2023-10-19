@@ -1,9 +1,9 @@
-package com.desafio.restartawsgeneration.controller;
+package com.desafio.restartawsgeneration.RestartAwsGenerationApplication.controller;
 
-import com.desafio.restartawsgeneration.entity.Matricula;
-import com.desafio.restartawsgeneration.exception.MatriculaNotFoundException;
-import com.desafio.restartawsgeneration.service.MatriculaService;
-import org.jetbrains.annotations.Contract;
+
+import com.desafio.restartawsgeneration.RestartAwsGenerationApplication.entity.Matricula;
+import com.desafio.restartawsgeneration.RestartAwsGenerationApplication.exception.MatriculaNotFoundException;
+import com.desafio.restartawsgeneration.RestartAwsGenerationApplication.service.MatriculaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ public class MatriculaController {
 
     private final MatriculaService matriculaService;
 
-    @Contract(pure = true)
+
     public MatriculaController(MatriculaService matriculaService) {
         this.matriculaService = matriculaService;
     }

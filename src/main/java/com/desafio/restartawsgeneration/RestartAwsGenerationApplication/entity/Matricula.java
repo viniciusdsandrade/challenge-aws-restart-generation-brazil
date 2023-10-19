@@ -1,4 +1,4 @@
-package com.desafio.restartawsgeneration.entity;
+package com.desafio.restartawsgeneration.RestartAwsGenerationApplication.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
