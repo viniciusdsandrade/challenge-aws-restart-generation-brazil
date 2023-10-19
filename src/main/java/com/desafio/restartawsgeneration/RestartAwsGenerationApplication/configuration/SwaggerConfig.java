@@ -50,7 +50,7 @@ public class SwaggerConfig {
                 .url("https://github.com/viniciusdsandrade/restart-aws-challenge");
     }
 
-    private void addStandardResponses(@NotNull ApiResponses apiResponses) {
+    private void addStandardResponses(@NotNull @org.jetbrains.annotations.NotNull ApiResponses apiResponses) {
         apiResponses.addApiResponse("200", createApiResponse("Sucesso!"));
         apiResponses.addApiResponse("201", createApiResponse("Objeto Persistido!"));
         apiResponses.addApiResponse("204", createApiResponse("Objeto Excluído!"));

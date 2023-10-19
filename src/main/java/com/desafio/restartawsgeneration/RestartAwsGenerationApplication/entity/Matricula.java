@@ -24,7 +24,7 @@ import java.time.LocalDate;
 @Entity(name = "Matricula")
 @Table(
         name = "tb_matricula",
-        schema = "db_escola"
+        schema = "db_gamestore"
 )
 public class Matricula {
 
