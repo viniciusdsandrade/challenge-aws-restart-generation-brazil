@@ -39,7 +39,7 @@ public class SwaggerConfig {
 
     private Contact apiContact() {
         return new Contact()
-                .url("https://github.com/viniciusdsandrade/reStart-aws-challenge")
+                .url("https://github.com/viniciusdsandrade/restart-aws-challenge")
                 .name("Restart")
                 .email("vinicius_andrade2010@hotmail.com");
     }
@@ -47,7 +47,7 @@ public class SwaggerConfig {
     private ExternalDocumentation externalDocs() {
         return new ExternalDocumentation()
                 .description("Documentação da API Escola")
-                .url("https://github.com/viniciusdsandrade/reStart-aws-challenge");
+                .url("https://github.com/viniciusdsandrade/restart-aws-challenge");
     }
 
     private void addStandardResponses(@NotNull ApiResponses apiResponses) {
