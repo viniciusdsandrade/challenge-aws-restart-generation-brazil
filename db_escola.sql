@@ -1,0 +1,3 @@
+DROP SCHEMA IF EXISTS db_escola;
+CREATE SCHEMA IF NOT EXISTS db_escola;
+USE db_escola;

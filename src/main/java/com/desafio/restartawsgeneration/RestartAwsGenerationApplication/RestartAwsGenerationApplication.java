@@ -1,13 +1,13 @@
 package com.desafio.restartawsgeneration.RestartAwsGenerationApplication;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+import static org.springframework.boot.SpringApplication.run;
+
+@SpringBootApplication(scanBasePackages = {"com.desafio.restartawsgeneration"})
 public class RestartAwsGenerationApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RestartAwsGenerationApplication.class, args);
+		run(RestartAwsGenerationApplication.class, args);
 	}
-
 }
