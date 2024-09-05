@@ -78,6 +78,7 @@ public class AlunoServiceImpl implements AlunoService {
         Aluno aluno = existePeloId(dados.id());
         log.debug("Matrícula encontrada para atualização: {}", aluno);
 
+
         aluno.atualizarInformacoes(dados);
         log.debug("Informações da matrícula atualizadas: {}", aluno);
 

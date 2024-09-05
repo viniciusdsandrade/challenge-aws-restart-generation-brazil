@@ -19,7 +19,6 @@ import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_WRITE;
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static java.time.LocalDateTime.now;
 import static java.util.Optional.ofNullable;
-import static java.util.Optional.of;
 import static lombok.AccessLevel.NONE;
 
 @AllArgsConstructor
@@ -80,10 +79,10 @@ public class Aluno {
     public void atualizarInformacoes(@Valid DadosAtualizacaoAluno dadosCadastroAluno) {
         ofNullable(dadosCadastroAluno.nome()).ifPresent(this::setNome);
         ofNullable(dadosCadastroAluno.dataNascimento()).ifPresent(this::setDataNascimento);
-        of(dadosCadastroAluno.notaDoPrimeiroSemestre()).ifPresent(this::setNotaDoPrimeiroSemestre);
-        of(dadosCadastroAluno.notaDoSegundoSemestre()).ifPresent(this::setNotaDoSegundoSemestre);
+        ofNullable(dadosCadastroAluno.notaDoPrimeiroSemestre()).ifPresent(this::setNotaDoPrimeiroSemestre);
+        ofNullable(dadosCadastroAluno.notaDoSegundoSemestre()).ifPresent(this::setNotaDoSegundoSemestre);
         ofNullable(dadosCadastroAluno.nomeProfessor()).ifPresent(this::setNomeProfessor);
-        of(dadosCadastroAluno.numeroSala()).ifPresent(this::setNumeroSala);
+        ofNullable(dadosCadastroAluno.numeroSala()).ifPresent(this::setNumeroSala);
         this.setLastUpdated(now());
     }
 

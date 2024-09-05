@@ -68,7 +68,7 @@ public class AlunoController {
         return ok(alunos);
     }
 
-    @PutMapping
+    @PatchMapping
     @Transactional
     @Operation(summary = "Atualizar os dados de uma matrícula")
     @ApiResponses(value = {
