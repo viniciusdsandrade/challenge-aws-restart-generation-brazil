@@ -33,7 +33,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
  * @see RestControllerAdvice
  * @see ExceptionHandler
  */
-@RestControllerAdvice(basePackages = "com.restful.desafio_locadora_de_veiculos_solutis_school_dev_trail.controller")
+@RestControllerAdvice(basePackages = "com.desafio.restartawsgeneration.RestartAwsGenerationApplication.controller")
 @Schema(description = "Classe responsável por tratar exceções globalmente na aplicação.")
 public class GlobalExceptionHandler {
 
@@ -106,35 +106,6 @@ public class GlobalExceptionHandler {
             ));
         }
         return ResponseEntity.status(BAD_REQUEST).body(errors);
-    }
-
-    /**
-     * Manipula a exceção {@link EntityNotFoundException}, que é lançada quando uma entidade
-     * requisitada não é encontrada no banco de dados.
-     * <p>
-     * Esta exceção é comum em operações de busca ou atualização, onde o identificador fornecido
-     * não corresponde a nenhuma entidade existente. O metodo encapsula os detalhes do erro em
-     * um objeto {@link ErrorDetails} e retorna uma resposta com status HTTP 404 (Not Found),
-     * indicando que o recurso requisitado não pôde ser localizado.
-     * </p>
-     *
-     * @param exception  A exceção de entidade não encontrada, que contém a mensagem de erro a ser retornada ao cliente.
-     * @param webRequest O objeto {@link WebRequest} que fornece informações adicionais sobre a requisição que causou a exceção.
-     * @return Uma {@link ResponseEntity} contendo uma lista com os detalhes do erro encapsulados em {@link ErrorDetails}
-     * e o status HTTP 404 (Not Found).
-     */
-    @ExceptionHandler(EntityNotFoundException.class)
-    @Schema(description = "Manipula a exceção EntityNotFoundException, lançada quando uma entidade não é encontrada.")
-    public ResponseEntity<List<ErrorDetails>> handleEntityNotFoundException(EntityNotFoundException exception,
-                                                                            WebRequest webRequest) {
-        ErrorDetails errorDetails = new ErrorDetails(
-                now(),
-                exception.getMessage(),
-                webRequest.getDescription(false),
-                "RESOURCE_NOT_FOUND"
-        );
-
-        return new ResponseEntity<>(List.of(errorDetails), NOT_FOUND);
     }
 
     /**

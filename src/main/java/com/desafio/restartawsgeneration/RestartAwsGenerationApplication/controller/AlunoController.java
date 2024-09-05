@@ -21,7 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import static org.springframework.http.ResponseEntity.*;
 
 @RestController
-@RequestMapping("/api/v1/matricula")
+@RequestMapping("/api/v1/aluno")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Tag(name = "Matrícula", description = "APIs para manipulação de matrículas")
 public class AlunoController {
@@ -45,7 +45,7 @@ public class AlunoController {
             UriComponentsBuilder uriBuilder
     ) {
         var aluno = alunoService.criarMatricula(dadosCadastroAluno);
-        var uri = uriBuilder.path("/api/v1/matricula/{id}").buildAndExpand(aluno.getId()).toUri();
+        var uri = uriBuilder.path("/api/v1/aluno/{id}").buildAndExpand(aluno.getId()).toUri();
         return created(uri).body(new DadosDetalhamentoAluno(aluno));
     }
 
@@ -63,20 +63,9 @@ public class AlunoController {
     @GetMapping
     @Operation(summary = "Listar matrículas", description = "Retorna uma lista paginada de matrículas.")
     @ApiResponse(responseCode = "200", description = "Lista de matrículas.")
-    public ResponseEntity<Page<DadosDetalhamentoAluno>> listar(@PageableDefault(size = 20, sort = {"nome"}) Pageable paginacao) {
+    public ResponseEntity<Page<DadosDetalhamentoAluno>> listar(@PageableDefault(size = 5) Pageable paginacao) {
         var alunos = alunoService.listar(paginacao);
         return ok(alunos);
-    }
-
-    @GetMapping("/detalhar-completo/{id}")
-    @Operation(summary = "Detalhar uma matrícula completa", description = "Retorna os detalhes completos de uma matrícula específica.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Matrícula encontrada."),
-            @ApiResponse(responseCode = "404", description = "Matrícula não encontrada.")
-    })
-    public ResponseEntity<DadosDetalhamentoAluno> detalharCompleto(@PathVariable Long id) {
-        var aluno = alunoService.buscarMatriculaPorId(id);
-        return ok(new DadosDetalhamentoAluno(aluno));
     }
 
     @PutMapping

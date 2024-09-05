@@ -10,12 +10,14 @@ import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 
 @Schema(name = "DadosCadastroAluno")
 public record DadosCadastroAluno(
+
         @NotBlank(message = "Nome é obrigatório")
         @Size(min = 3, max = 80, message = "O nome deve ter entre 3 e 80 caracteres")
         @Schema(description = "Nome do aluno")
         String nome,
 
         @NotNull(message = "Data de nascimento é obrigatória")
+        @Past(message = "A data de nascimento deve ser anterior à data atual")
         @JsonFormat(pattern = "dd/MM/yyyy", shape = STRING, locale = "pt-BR", timezone = "Brazil/East")
         @Schema(description = "Data de nascimento do motorista.")
         LocalDate dataNascimento,
@@ -39,6 +41,7 @@ public record DadosCadastroAluno(
 
         @NotNull(message = "Número da sala é obrigatório")
         @Schema(description = "Número da sala")
+        @Positive(message = "O número da sala deve ser maior que zero")
         int numeroSala
 ) {
 }
